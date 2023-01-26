@@ -23,6 +23,8 @@
 		E17125E42981FDAC009F36A5 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125E32981FDAC009F36A5 /* Color.swift */; };
 		E17125E62981FEBA009F36A5 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125E52981FEBA009F36A5 /* APIRequest.swift */; };
 		E17125E929820D8E009F36A5 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125E829820D8E009F36A5 /* APIService.swift */; };
+		E17125EB2982FD94009F36A5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125EA2982FD94009F36A5 /* Settings.swift */; };
+		E17125EE29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125ED29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		E17125E32981FDAC009F36A5 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		E17125E52981FEBA009F36A5 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		E17125E829820D8E009F36A5 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		E17125EA2982FD94009F36A5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		E17125ED29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewDiffableDataSource+ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 				E17125E02981FD49009F36A5 /* Models */,
 				E17125D72980BC0B009F36A5 /* View Controllers */,
 				E17125D92980BC39009F36A5 /* Storyboards */,
+				E17125EC298306FD009F36A5 /* Utility */,
 				E17125BE2980B7D9009F36A5 /* Assets.xcassets */,
 				E17125C32980B7D9009F36A5 /* Info.plist */,
 			);
@@ -169,6 +174,15 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		E17125EC298306FD009F36A5 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E17125EA2982FD94009F36A5 /* Settings.swift */,
+				E17125ED29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,8 +256,10 @@
 			files = (
 				E17125D22980BBC8009F36A5 /* LogHabitCollectionViewController.swift in Sources */,
 				E17125E22981FD8B009F36A5 /* Category.swift in Sources */,
+				E17125EE29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */,
 				E17125E42981FDAC009F36A5 /* Color.swift in Sources */,
 				E17125CC2980BB98009F36A5 /* HomeCollectionViewController.swift in Sources */,
+				E17125EB2982FD94009F36A5 /* Settings.swift in Sources */,
 				E17125DD2980BD17009F36A5 /* UserDetailViewController.swift in Sources */,
 				E17125CE2980BBB1009F36A5 /* HabitCollectionViewController.swift in Sources */,
 				E17125B62980B7D6009F36A5 /* AppDelegate.swift in Sources */,
