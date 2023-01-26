@@ -61,6 +61,17 @@ class HabitCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataSource = createDataSource()
+        collectionView.dataSource = dataSource
+        collectionView.collectionViewLayout = createLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Update the data on each visit
+        update()
     }
     
     // Get habit objects from the server
@@ -87,7 +98,7 @@ class HabitCollectionViewController: UICollectionViewController {
     func updateCollectionView() {
         
         // Build a dictionary that maps each section to its associated array of items
-        let itemsBySection = model.habitsByName.values.reduce(into: [ViewModel.Section: [ViewModel.Item]]()) { partial, habit in
+        var itemsBySection = model.habitsByName.values.reduce(into: [ViewModel.Section: [ViewModel.Item]]()) { partial, habit in
             
             // Get the next habit
             let item = habit
@@ -107,11 +118,47 @@ class HabitCollectionViewController: UICollectionViewController {
             partial[section, default: []].append(item)
         }
         
+        // Sort the items in each section
+        itemsBySection = itemsBySection.mapValues { $0.sorted() }
+        
         // Store the section IDs for all categories, sorted by name
         let sectionIDs = itemsBySection.keys.sorted()
         
         // Apply the snapshot
         dataSource.applySnapshotUsing(sectionIDs: sectionIDs, itemsBySection: itemsBySection)
         
+    }
+    
+    // Create the collection view data source
+    func createDataSource() -> DataSourceType {
+        let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Habit", for: indexPath) as! UICollectionViewListCell
+            
+            var content = cell.defaultContentConfiguration()
+            content.text = item.name
+            cell.contentConfiguration = content
+            
+            return cell
+        }
+        
+        return dataSource
+    }
+    
+    // Create a list-style compositional layout
+    func createLayout() -> UICollectionViewCompositionalLayout {
+        
+        // Create the item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        // Create the group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        
+        // Create the section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        
+        return UICollectionViewCompositionalLayout(section: section)
     }
 }
