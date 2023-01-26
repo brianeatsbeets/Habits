@@ -52,6 +52,16 @@ class HabitCollectionViewController: UICollectionViewController {
         }
     }
     
+    // This enum encapsulates the section header identifiers
+    enum SectionHeader: String {
+        case kind = "SectionHeader"
+        case reuse = "HeaderView"
+        
+        var identifier: String {
+            return rawValue
+        }
+    }
+    
     // ---------------------------------------------------------------------------------------- //
     
     var dataSource: DataSourceType!
@@ -61,6 +71,8 @@ class HabitCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.register(NamedSectionHeaderView.self, forSupplementaryViewOfKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier)
         
         dataSource = createDataSource()
         collectionView.dataSource = dataSource
@@ -131,6 +143,8 @@ class HabitCollectionViewController: UICollectionViewController {
     
     // Create the collection view data source
     func createDataSource() -> DataSourceType {
+        
+        // Create the cell for each item
         let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Habit", for: indexPath) as! UICollectionViewListCell
             
@@ -139,6 +153,21 @@ class HabitCollectionViewController: UICollectionViewController {
             cell.contentConfiguration = content
             
             return cell
+        }
+        
+        // Create the header view for each section
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier, for: indexPath) as! NamedSectionHeaderView
+            
+            let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            switch section {
+            case .favorites:
+                header.nameLabel.text = "Favorites"
+            case .category(let category):
+                header.nameLabel.text = category.name
+            }
+            
+            return header
         }
         
         return dataSource
@@ -155,9 +184,15 @@ class HabitCollectionViewController: UICollectionViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
+        // Create the section header
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(36))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: SectionHeader.kind.identifier, alignment: .top)
+        sectionHeader.pinToVisibleBounds = true
+        
         // Create the section
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.boundarySupplementaryItems = [sectionHeader]
         
         return UICollectionViewCompositionalLayout(section: section)
     }

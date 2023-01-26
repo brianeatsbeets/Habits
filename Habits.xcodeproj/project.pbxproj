@@ -25,6 +25,7 @@
 		E17125E929820D8E009F36A5 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125E829820D8E009F36A5 /* APIService.swift */; };
 		E17125EB2982FD94009F36A5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125EA2982FD94009F36A5 /* Settings.swift */; };
 		E17125EE29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125ED29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift */; };
+		E17125F029831A62009F36A5 /* NamedSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125EF29831A62009F36A5 /* NamedSectionHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E17125E829820D8E009F36A5 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E17125EA2982FD94009F36A5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E17125ED29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewDiffableDataSource+ViewModel.swift"; sourceTree = "<group>"; };
+		E17125EF29831A62009F36A5 /* NamedSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedSectionHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				E17125D82980BC18009F36A5 /* App_SceneDelegate */,
 				E17125E02981FD49009F36A5 /* Models */,
 				E17125D72980BC0B009F36A5 /* View Controllers */,
+				E17125F129831A67009F36A5 /* Views */,
 				E17125D92980BC39009F36A5 /* Storyboards */,
 				E17125EC298306FD009F36A5 /* Utility */,
 				E17125BE2980B7D9009F36A5 /* Assets.xcassets */,
@@ -183,6 +186,14 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		E17125F129831A67009F36A5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E17125EF29831A62009F36A5 /* NamedSectionHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,6 +270,7 @@
 				E17125EE29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */,
 				E17125E42981FDAC009F36A5 /* Color.swift in Sources */,
 				E17125CC2980BB98009F36A5 /* HomeCollectionViewController.swift in Sources */,
+				E17125F029831A62009F36A5 /* NamedSectionHeaderView.swift in Sources */,
 				E17125EB2982FD94009F36A5 /* Settings.swift in Sources */,
 				E17125DD2980BD17009F36A5 /* UserDetailViewController.swift in Sources */,
 				E17125CE2980BBB1009F36A5 /* HabitCollectionViewController.swift in Sources */,
