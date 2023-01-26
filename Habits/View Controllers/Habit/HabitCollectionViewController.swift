@@ -196,4 +196,28 @@ class HabitCollectionViewController: UICollectionViewController {
         
         return UICollectionViewCompositionalLayout(section: section)
     }
+    
+    // Provide a context menu to toggle the favorite status of a habit
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let config = UIContextMenuConfiguration(actionProvider:  { _ in
+            
+            // Get item at index path
+            let item = self.dataSource.itemIdentifier(for: indexPath)!
+            
+            // Create menu action
+            let favoriteToggle = UIAction(title: self.model.favoriteHabits.contains(item) ? "Unfavorite" : "Favorite") { action in
+                
+                // Toggle favorite status
+                Settings.shared.toggleFavorite(item)
+                
+                // Update collection view
+                self.updateCollectionView()
+            }
+            
+            return UIMenu(children: [favoriteToggle])
+        })
+        
+        return config
+    }
 }

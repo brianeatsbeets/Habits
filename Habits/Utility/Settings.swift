@@ -8,7 +8,7 @@
 import Foundation
 
 // This struct provides a shared instance of UserDefaults for storing favorite habits
-// Normally this would be stored with other user-specific information, but we're only concerned about the active user account (other user data is simulated on the local server)
+// Normally this would be stored with other user-specific information in the database, but we're only concerned about the active user account (other user data is simulated on the local server)
 struct Settings {
     
     // This enum serves as a namespace to store key strings
@@ -42,5 +42,18 @@ struct Settings {
         }
         
         return try! JSONDecoder().decode(T.self, from: data)
+    }
+    
+    // Toggle the favorite status of a provided habit
+    mutating func toggleFavorite(_ habit: Habit) {
+        var favorites = favoriteHabits
+        
+        if favorites.contains(habit) {
+            favorites = favorites.filter { $0 != habit }
+        } else {
+            favorites.append(habit)
+        }
+        
+        favoriteHabits = favorites
     }
 }
