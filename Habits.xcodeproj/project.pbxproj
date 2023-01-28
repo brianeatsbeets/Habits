@@ -26,6 +26,7 @@
 		E17125EB2982FD94009F36A5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125EA2982FD94009F36A5 /* Settings.swift */; };
 		E17125EE29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125ED29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift */; };
 		E17125F029831A62009F36A5 /* NamedSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125EF29831A62009F36A5 /* NamedSectionHeaderView.swift */; };
+		E17125F329856A75009F36A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125F229856A75009F36A5 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		E17125EA2982FD94009F36A5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E17125ED29830718009F36A5 /* UICollectionViewDiffableDataSource+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewDiffableDataSource+ViewModel.swift"; sourceTree = "<group>"; };
 		E17125EF29831A62009F36A5 /* NamedSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedSectionHeaderView.swift; sourceTree = "<group>"; };
+		E17125F229856A75009F36A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				E17125DE2981FD45009F36A5 /* Habit.swift */,
 				E17125E12981FD8B009F36A5 /* Category.swift */,
 				E17125E32981FDAC009F36A5 /* Color.swift */,
+				E17125F229856A75009F36A5 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				E17125CC2980BB98009F36A5 /* HomeCollectionViewController.swift in Sources */,
 				E17125F029831A62009F36A5 /* NamedSectionHeaderView.swift in Sources */,
 				E17125EB2982FD94009F36A5 /* Settings.swift in Sources */,
+				E17125F329856A75009F36A5 /* User.swift in Sources */,
 				E17125DD2980BD17009F36A5 /* UserDetailViewController.swift in Sources */,
 				E17125CE2980BBB1009F36A5 /* HabitCollectionViewController.swift in Sources */,
 				E17125B62980B7D6009F36A5 /* AppDelegate.swift in Sources */,

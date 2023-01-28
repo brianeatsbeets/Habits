@@ -7,24 +7,36 @@
 
 import Foundation
 
-// This struct provides a shared instance of UserDefaults for storing favorite habits
+// This struct provides a shared instance of UserDefaults for storing active user data
 // Normally this would be stored with other user-specific information in the database, but we're only concerned about the active user account (other user data is simulated on the local server)
 struct Settings {
-    
-    // This enum serves as a namespace to store key strings
-    enum Setting {
-        static let favoriteHabits = "favoriteHabits"
-    }
     
     static var shared = Settings()
     private let defaults = UserDefaults.standard
     
+    // This enum serves as a namespace to store key strings
+    enum Setting {
+        static let favoriteHabits = "favoriteHabits"
+        static let followedUserIDs = "followedUserIDs"
+    }
+    
+    // Store favorite habits
     var favoriteHabits: [Habit] {
         get {
             return unarchiveJSON(key: Setting.favoriteHabits) ?? []
         }
         set {
             archiveJSON(value: newValue, key: Setting.favoriteHabits)
+        }
+    }
+    
+    // Store followed user IDs
+    var followedUserIDs: [String] {
+        get {
+            return unarchiveJSON(key: Setting.followedUserIDs) ?? []
+        }
+        set {
+            archiveJSON(value: newValue, key: Setting.followedUserIDs)
         }
     }
     
@@ -55,5 +67,18 @@ struct Settings {
         }
         
         favoriteHabits = favorites
+    }
+    
+    // Toggle the followed status of a user
+    mutating func toggleFollowed(user: User) {
+        var updated = followedUserIDs
+        
+        if updated.contains(user.id) {
+            updated = updated.filter { $0 != user.id }
+        } else {
+            updated.append(user.id)
+        }
+        
+        followedUserIDs = updated
     }
 }
