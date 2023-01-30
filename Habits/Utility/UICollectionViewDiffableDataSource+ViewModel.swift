@@ -28,6 +28,7 @@ extension UICollectionViewDiffableDataSource {
             // Append sections and items
             snapshot.appendSections([sectionID])
             snapshot.appendItems(sectionItems, toSection: sectionID)
+            snapshot.reloadItems(sectionItems)
         }
         
         // Apply the snapshot

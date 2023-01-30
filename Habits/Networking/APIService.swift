@@ -28,3 +28,24 @@ struct UserRequest: APIRequest {
     // API endpoint
     var path: String { "/users" }
 }
+
+// This struct creates an API request for habit statistics
+struct HabitStatisticsRequest: APIRequest {
+    
+    // The return type of the request
+    typealias Response = [HabitStatistics]
+    
+    var habitNames: [String]?
+    
+    // API endpoint
+    var path: String { "/habitStats" }
+    
+    // Parse multiple query items
+    var queryItems: [URLQueryItem]? {
+        if let habitNames = habitNames {
+            return [URLQueryItem(name: "names", value: habitNames.joined(separator: ","))]
+        } else {
+            return nil
+        }
+    }
+}
