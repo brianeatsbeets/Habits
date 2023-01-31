@@ -14,6 +14,13 @@ struct HabitStatistics {
 // This extension conforms to Codable
 extension HabitStatistics: Codable { }
 
+// This extension conforms to Comparable
+extension HabitCount: Comparable {
+    static func < (lhs: HabitCount, rhs: HabitCount) -> Bool {
+        return lhs.habit < rhs.habit
+    }
+}
+
 // This struct provides a container for user count data
 struct UserCount {
     let user: User

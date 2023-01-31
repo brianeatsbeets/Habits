@@ -28,6 +28,7 @@
 		E17125F029831A62009F36A5 /* NamedSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125EF29831A62009F36A5 /* NamedSectionHeaderView.swift */; };
 		E17125F329856A75009F36A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125F229856A75009F36A5 /* User.swift */; };
 		E17125F529885522009F36A5 /* HabitStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125F429885522009F36A5 /* HabitStatistics.swift */; };
+		E17125F7298873E6009F36A5 /* UserStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125F6298873E6009F36A5 /* UserStatistics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		E17125EF29831A62009F36A5 /* NamedSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedSectionHeaderView.swift; sourceTree = "<group>"; };
 		E17125F229856A75009F36A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E17125F429885522009F36A5 /* HabitStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatistics.swift; sourceTree = "<group>"; };
+		E17125F6298873E6009F36A5 /* UserStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatistics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				E17125E32981FDAC009F36A5 /* Color.swift */,
 				E17125F229856A75009F36A5 /* User.swift */,
 				E17125F429885522009F36A5 /* HabitStatistics.swift */,
+				E17125F6298873E6009F36A5 /* UserStatistics.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				E17125F329856A75009F36A5 /* User.swift in Sources */,
 				E17125DD2980BD17009F36A5 /* UserDetailViewController.swift in Sources */,
 				E17125CE2980BBB1009F36A5 /* HabitCollectionViewController.swift in Sources */,
+				E17125F7298873E6009F36A5 /* UserStatistics.swift in Sources */,
 				E17125B62980B7D6009F36A5 /* AppDelegate.swift in Sources */,
 				E17125F529885522009F36A5 /* HabitStatistics.swift in Sources */,
 				E17125B82980B7D6009F36A5 /* SceneDelegate.swift in Sources */,

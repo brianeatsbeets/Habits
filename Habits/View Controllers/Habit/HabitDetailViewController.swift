@@ -84,6 +84,7 @@ class HabitDetailViewController: UIViewController {
         
         update()
         
+        // Initialize update timer
         updateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
             self.update()
         })
@@ -92,6 +93,7 @@ class HabitDetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        // Deinitialize update timer
         updateTimer?.invalidate()
         updateTimer = nil
     }
@@ -107,7 +109,7 @@ class HabitDetailViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    // Get habit stastics objects from the server
+    // Get habit statistics objects from the server
     func update() {
         
         // Cancel existing tasks

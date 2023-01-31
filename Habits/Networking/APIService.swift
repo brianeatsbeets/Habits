@@ -49,3 +49,36 @@ struct HabitStatisticsRequest: APIRequest {
         }
     }
 }
+
+// This struct creates an API request for user statistics
+struct UserStatisticsRequest: APIRequest {
+    
+    // The return type of the request
+    typealias Response = [UserStatistics]
+    
+    var userIDs: [String]?
+    
+    // API endpoint
+    var path: String { "/userStats" }
+    
+    // Parse multiple query items
+    var queryItems: [URLQueryItem]? {
+        if let userIDs = userIDs {
+            return [URLQueryItem(name: "ids", value: userIDs.joined(separator: ","))]
+        } else {
+            return nil
+        }
+    }
+}
+
+// This struct creates an API request for user leading statistics
+struct HabitLeadStatisticsRequest: APIRequest {
+    
+    // The return type of the request
+    typealias Response = UserStatistics
+    
+    var userID: String
+    
+    // API endpoint
+    var path: String { "/userLeadingStats/\(userID)" }
+}
