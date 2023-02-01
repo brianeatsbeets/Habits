@@ -94,3 +94,25 @@ struct ImageRequest: APIRequest {
     // API endpoint
     var path: String { "/images/" + imageID }
 }
+
+// This struct creates an API request to log a habit
+struct LogHabitRequest: APIRequest {
+    
+    // The return type of the request
+    typealias Response = Void
+    
+    var loggedHabit: LoggedHabit
+    
+    // API endpoint
+    var path: String { "/loggedHabit" }
+    
+    // Build the post data
+    var postData: Data? {
+        let encoder = JSONEncoder()
+        
+        // Specify the encoding format that the server utilizes
+        encoder.dateEncodingStrategy = .iso8601
+        
+        return try! encoder.encode(loggedHabit)
+    }
+}

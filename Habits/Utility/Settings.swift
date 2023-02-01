@@ -13,6 +13,7 @@ struct Settings {
     
     static var shared = Settings()
     private let defaults = UserDefaults.standard
+    let currentUser = User(id: "activeUser", name: "Active User", color: nil, bio: nil)
     
     // This enum serves as a namespace to store key strings
     enum Setting {
