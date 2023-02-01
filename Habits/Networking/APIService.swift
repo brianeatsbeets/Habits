@@ -116,3 +116,13 @@ struct LogHabitRequest: APIRequest {
         return try! encoder.encode(loggedHabit)
     }
 }
+
+// This struct creates an API request for combined statistics
+struct CombinedStatisticsRequest: APIRequest {
+    
+    // The return type of the request
+    typealias Response = CombinedStatistics
+    
+    // API endpoint
+    var path: String { "/combinedStats" }
+}

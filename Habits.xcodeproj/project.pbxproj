@@ -32,6 +32,7 @@
 		E17125F9298AF980009F36A5 /* LoggedHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125F8298AF980009F36A5 /* LoggedHabit.swift */; };
 		E17125FB298B011E009F36A5 /* LeaderboardHabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125FA298B011E009F36A5 /* LeaderboardHabitCollectionViewCell.swift */; };
 		E17125FD298B02FE009F36A5 /* FollowedUserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125FC298B02FE009F36A5 /* FollowedUserCollectionViewCell.swift */; };
+		E17125FF298B16E2009F36A5 /* CombinedStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17125FE298B16E2009F36A5 /* CombinedStatistics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		E17125F8298AF980009F36A5 /* LoggedHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedHabit.swift; sourceTree = "<group>"; };
 		E17125FA298B011E009F36A5 /* LeaderboardHabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardHabitCollectionViewCell.swift; sourceTree = "<group>"; };
 		E17125FC298B02FE009F36A5 /* FollowedUserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUserCollectionViewCell.swift; sourceTree = "<group>"; };
+		E17125FE298B16E2009F36A5 /* CombinedStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedStatistics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				E17125F429885522009F36A5 /* HabitStatistics.swift */,
 				E17125F6298873E6009F36A5 /* UserStatistics.swift */,
 				E17125F8298AF980009F36A5 /* LoggedHabit.swift */,
+				E17125FE298B16E2009F36A5 /* CombinedStatistics.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				E17125F7298873E6009F36A5 /* UserStatistics.swift in Sources */,
 				E17125B62980B7D6009F36A5 /* AppDelegate.swift in Sources */,
 				E17125F529885522009F36A5 /* HabitStatistics.swift in Sources */,
+				E17125FF298B16E2009F36A5 /* CombinedStatistics.swift in Sources */,
 				E17125B82980B7D6009F36A5 /* SceneDelegate.swift in Sources */,
 				E17125FD298B02FE009F36A5 /* FollowedUserCollectionViewCell.swift in Sources */,
 				E17125F9298AF980009F36A5 /* LoggedHabit.swift in Sources */,
