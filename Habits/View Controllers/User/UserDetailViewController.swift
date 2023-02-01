@@ -80,6 +80,18 @@ class UserDetailViewController: UIViewController {
         userNameLabel.text = user.name
         bioLabel.text = user.bio
         
+        // Fetch the user image
+        // This API endpoint does not seem to be functioning correctly in the HabitServer app
+        imageRequestTask = Task {
+            if let image = try? await ImageRequest(imageID: user.id).send() {
+                self.profileImageView.image = image
+            } else {
+                print("Failed")
+            }
+            
+            imageRequestTask = nil
+        }
+        
         collectionView.register(NamedSectionHeaderView.self, forSupplementaryViewOfKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier)
         
         dataSource = createDataSource()

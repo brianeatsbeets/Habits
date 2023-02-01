@@ -5,7 +5,7 @@
 //  Created by Aguirre, Brian P. on 1/25/23.
 //
 
-import Foundation
+import UIKit
 
 // This protocol provides a generic, efficient template for creating network requests
 protocol APIRequest {
@@ -81,5 +81,36 @@ extension APIRequest where Response: Decodable {
         let decoded = try decoder.decode(Response.self, from: data)
         
         return decoded
+    }
+}
+
+// This enum contains cases for image request errors
+enum ImageRequestError: Error {
+    case couldNotInitializeFromData
+    case imageDataMissing
+}
+
+// This extension sends image requests and handles the results
+// Only usable by types with a UIImage Response type
+extension APIRequest where Response == UIImage {
+    func send() async throws -> UIImage {
+        
+        // Initiate the data task
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        // Make sure we have a valid response
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            print("Flag 1")
+            throw ImageRequestError.imageDataMissing
+        }
+        
+        // Attempt to initalize an image from the data
+        guard let image = UIImage(data: data) else {
+            print("Flag 2")
+            throw ImageRequestError.couldNotInitializeFromData
+        }
+        
+        return image
     }
 }

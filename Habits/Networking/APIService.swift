@@ -5,7 +5,7 @@
 //  Created by Aguirre, Brian P. on 1/25/23.
 //
 
-import Foundation
+import UIKit
 
 // This struct creates an API request for habits
 struct HabitRequest: APIRequest {
@@ -81,4 +81,16 @@ struct HabitLeadStatisticsRequest: APIRequest {
     
     // API endpoint
     var path: String { "/userLeadingStats/\(userID)" }
+}
+
+// This struct creates an API request for user images
+struct ImageRequest: APIRequest {
+    
+    // The return type of the request
+    typealias Response = UIImage
+    
+    var imageID: String
+    
+    // API endpoint
+    var path: String { "/images/" + imageID }
 }
