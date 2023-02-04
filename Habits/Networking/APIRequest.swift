@@ -101,13 +101,11 @@ extension APIRequest where Response == UIImage {
         // Make sure we have a valid response
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
-            print("Flag 1")
             throw ImageRequestError.imageDataMissing
         }
         
         // Attempt to initalize an image from the data
         guard let image = UIImage(data: data) else {
-            print("Flag 2")
             throw ImageRequestError.couldNotInitializeFromData
         }
         

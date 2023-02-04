@@ -85,8 +85,6 @@ class UserDetailViewController: UIViewController {
         imageRequestTask = Task {
             if let image = try? await ImageRequest(imageID: user.id).send() {
                 self.profileImageView.image = image
-            } else {
-                print("Failed")
             }
             
             imageRequestTask = nil

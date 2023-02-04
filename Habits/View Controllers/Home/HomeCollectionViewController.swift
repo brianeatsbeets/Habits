@@ -7,8 +7,80 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+//---Supporting elements---//
 
+// This enum provides options for supplementary view registration
+enum SupplementaryItemType {
+    case collectionSupplementaryView
+    case layoutDecorationView
+}
+
+// This protocol provides a generic implementation for registering supplementary items
+protocol SupplementaryItem {
+    associatedtype ViewClass: UICollectionReusableView
+    
+    var itemType: SupplementaryItemType { get }
+    
+    var reuseIdentifier: String { get }
+    var viewKind: String { get }
+    var viewClass: ViewClass.Type { get }
+}
+
+// This extension provides a function to register supplementary items
+extension SupplementaryItem {
+    func register(on collectionView: UICollectionView) {
+        switch itemType {
+        case .collectionSupplementaryView:
+            collectionView.register(viewClass.self, forSupplementaryViewOfKind: viewKind, withReuseIdentifier: reuseIdentifier)
+        case .layoutDecorationView:
+            collectionView.collectionViewLayout.register(viewClass.self, forDecorationViewOfKind: viewKind)
+        }
+    }
+}
+
+// This enum serves as a container for supplementary view properties and variations
+enum SupplementaryView: String, CaseIterable, SupplementaryItem {
+    case leaderboardSectionHeader
+    case leaderboardBackground
+    case followedUsersSectionHeader
+    
+    var reuseIdentifier: String {
+        return rawValue
+    }
+    
+    var viewKind: String {
+        return rawValue
+    }
+    
+    var viewClass: UICollectionReusableView.Type {
+        switch self {
+        case .leaderboardBackground:
+            return SectionBackgroundView.self
+        default:
+            return NamedSectionHeaderView.self
+        }
+    }
+    
+    var itemType: SupplementaryItemType {
+        switch self {
+        case .leaderboardBackground:
+            return .layoutDecorationView
+        default:
+            return .collectionSupplementaryView
+        }
+    }
+}
+
+// This class provides an implementation for SectionBackgroundView
+class SectionBackgroundView: UICollectionReusableView {
+    override func didMoveToSuperview() {
+        backgroundColor = .systemGray6
+    }
+}
+
+//--- Main elements ---//
+
+// This class contains the implementation for HomeCollectionViewController
 class HomeCollectionViewController: UICollectionViewController {
     
     // Keep track of async tasks so they can be cancelled when appropriate
@@ -132,6 +204,16 @@ class HomeCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource = createDataSource()
+        collectionView.dataSource = dataSource
+        collectionView.collectionViewLayout = createLayout()
+        
+        // Register supplementary views
+        // Layout must be created before registration because we have a decoration view that must be registered with the layout, not the collection view
+        for supplementaryView in SupplementaryView.allCases {
+            supplementaryView.register(on: collectionView)
+        }
+        
         // Fetch users
         userRequestTask = Task {
             if let users = try? await UserRequest().send() {
@@ -153,10 +235,6 @@ class HomeCollectionViewController: UICollectionViewController {
             
             habitRequestTask = nil
         }
-        
-        dataSource = createDataSource()
-        collectionView.dataSource = dataSource
-        collectionView.collectionViewLayout = createLayout()
     }
     
     // // Get combined statistics data from the server
@@ -339,6 +417,7 @@ class HomeCollectionViewController: UICollectionViewController {
         
         // Create the cell for each item
         let dataSource = DataSourceType(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            
             switch item {
             case .leaderboardHabit(let name, let leadingUserRanking, let secondaryUserRanking):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeaderboardHabit", for: indexPath) as! LeaderboardHabitCollectionViewCell
@@ -351,6 +430,30 @@ class HomeCollectionViewController: UICollectionViewController {
                 cell.primaryTextLabel.text = user.name
                 cell.secondaryTextLabel.text = message
                 return cell
+            }
+        }
+        
+        // Create the supplementary view for each section
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            guard let elementKind = SupplementaryView(rawValue: kind) else { return nil }
+            
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind.viewKind, withReuseIdentifier: elementKind.reuseIdentifier, for: indexPath)
+            
+            switch elementKind {
+            case .leaderboardSectionHeader:
+                let header = view as! NamedSectionHeaderView
+                header.nameLabel.text = "Leaderboard"
+                header.nameLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+                header.alignLabelToTop()
+                return header
+            case .followedUsersSectionHeader:
+                let header = view as! NamedSectionHeaderView
+                header.nameLabel.text = "Following"
+                header.nameLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+                header.alignLabelToYCenter()
+                return header
+            default:
+                return nil
             }
         }
         
@@ -379,6 +482,15 @@ class HomeCollectionViewController: UICollectionViewController {
                 leaderboardSection.orthogonalScrollingBehavior = .continuous
                 leaderboardSection.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 20, bottom: 20, trailing: 20)
                 
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(80))
+                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: SupplementaryView.leaderboardSectionHeader.viewKind, alignment: .top)
+                
+                let background = NSCollectionLayoutDecorationItem.background(elementKind: SupplementaryView.leaderboardBackground.viewKind)
+                
+                leaderboardSection.boundarySupplementaryItems = [header]
+                leaderboardSection.decorationItems = [background]
+                leaderboardSection.supplementariesFollowContentInsets = false
+                
                 return leaderboardSection
             case .followedUsers:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
@@ -388,6 +500,11 @@ class HomeCollectionViewController: UICollectionViewController {
                 let followedUserGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: followedUserItem, count: 1)
                 
                 let followedUserSection = NSCollectionLayoutSection(group: followedUserGroup)
+                
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
+                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: SupplementaryView.followedUsersSectionHeader.viewKind, alignment: .top)
+                
+                followedUserSection.boundarySupplementaryItems = [header]
                 
                 return followedUserSection
             }
