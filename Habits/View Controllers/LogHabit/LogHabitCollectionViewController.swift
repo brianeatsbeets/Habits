@@ -67,4 +67,44 @@ class LogHabitCollectionViewController: HabitCollectionViewController {
         }
     }
     
+    // Create custom cell configuration for Log Habits view
+    override func configureCell(_ cell: UICollectionViewListCell, withItem item: HabitCollectionViewController.ViewModel.Item) {
+        
+        // Re-configure the cell when there is a change in state (i.e. press)
+        cell.configurationUpdateHandler =  { cell, state in
+            
+            // Configure test and margins
+            var content = UIListContentConfiguration.cell().updated(for: state)
+            content.text = item.name
+            content.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 11, leading: 8, bottom: 11, trailing: 8)
+            content.textProperties.alignment = .center
+            cell.contentConfiguration = content
+            
+            // Configure background color
+            var backgroundConfiguration = UIBackgroundConfiguration.listPlainCell().updated(for: state)
+            
+            if Settings.shared.favoriteHabits.contains(item) {
+                backgroundConfiguration.backgroundColor = favoriteHabitColor
+            } else {
+                backgroundConfiguration.backgroundColor = .systemGray6
+            }
+            
+            if state.isHighlighted {
+                
+                // Reduce the alpha of the tint color to 30% when highlighted
+                backgroundConfiguration.backgroundColorTransformer = .init { $0.withAlphaComponent(0.3) }
+            }
+            
+            backgroundConfiguration.cornerRadius = 8
+            cell.backgroundConfiguration = backgroundConfiguration
+        }
+        
+        // Create a shadow effect to give the cells more depth
+        cell.layer.shadowRadius = 3
+        cell.layer.shadowColor = UIColor.systemGray3.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 2)
+        cell.layer.shadowOpacity = 1
+        cell.layer.masksToBounds = false
+    }
+    
 }

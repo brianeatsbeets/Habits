@@ -7,13 +7,11 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+let favoriteHabitColor = UIColor(hue: 0.15, saturation: 1, brightness: 0.9, alpha: 1)
 
 // This class contains the implementation for HabitCollectionViewController
 // This class utilizes a hybrid MVC-MVVM approach
 class HabitCollectionViewController: UICollectionViewController {
-    
-    // ---------------------------------------------------------------------------------------- //
     
     // Keep track of async tasks so they can be cancelled when appropriate
     var habitsRequestTask: Task<Void, Never>? = nil
@@ -27,6 +25,15 @@ class HabitCollectionViewController: UICollectionViewController {
         enum Section: Hashable, Comparable {
             case favorites
             case category(_ category: Category)
+            
+            var sectionColor: UIColor {
+                switch self {
+                case .favorites:
+                    return favoriteHabitColor
+                case .category(let category):
+                    return category.color.uiColor
+                }
+            }
             
             // Sort categories by name, and make sure favorites is at the beginning
             static func < (lhs: Section, rhs: Section) -> Bool {
@@ -61,8 +68,6 @@ class HabitCollectionViewController: UICollectionViewController {
             return rawValue
         }
     }
-    
-    // ---------------------------------------------------------------------------------------- //
     
     var dataSource: DataSourceType!
     
@@ -142,15 +147,19 @@ class HabitCollectionViewController: UICollectionViewController {
     }
     
     // Create the collection view data source
+    func configureCell(_ cell: UICollectionViewListCell, withItem item: HabitCollectionViewController.ViewModel.Item) {
+        var content = cell.defaultContentConfiguration()
+        content.text = item.name
+        cell.contentConfiguration = content
+    }
+    
     func createDataSource() -> DataSourceType {
         
         // Create the cell for each item
         let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Habit", for: indexPath) as! UICollectionViewListCell
             
-            var content = cell.defaultContentConfiguration()
-            content.text = item.name
-            cell.contentConfiguration = content
+            self.configureCell(cell, withItem: item)
             
             return cell
         }
@@ -166,6 +175,8 @@ class HabitCollectionViewController: UICollectionViewController {
             case .category(let category):
                 header.nameLabel.text = category.name
             }
+            
+            header.backgroundColor = section.sectionColor
             
             return header
         }

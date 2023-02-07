@@ -109,23 +109,13 @@ class UserCollectionViewController: UICollectionViewController {
             content.textProperties.alignment = .center
             cell.contentConfiguration = content
             
+            var backgroundConfiguration = UIBackgroundConfiguration.clear()
+            backgroundConfiguration.backgroundColor = item.user.color?.uiColor ?? UIColor.systemGray4
+            backgroundConfiguration.cornerRadius = 8
+            cell.backgroundConfiguration = backgroundConfiguration
+            
             return cell
         }
-        
-//        // Create the header view for each section
-//        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-//            let header = collectionView.dequeueReusableSupplementaryView(ofKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier, for: indexPath) as! NamedSectionHeaderView
-//
-//            let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
-//            switch section {
-//            case .favorites:
-//                header.nameLabel.text = "Favorites"
-//            case .category(let category):
-//                header.nameLabel.text = category.name
-//            }
-//
-//            return header
-//        }
         
         return dataSource
     }
@@ -141,11 +131,6 @@ class UserCollectionViewController: UICollectionViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.45))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         group.interItemSpacing = .fixed(20)
-        
-//        // Create the section header
-//        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(36))
-//        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: SectionHeader.kind.identifier, alignment: .top)
-//        sectionHeader.pinToVisibleBounds = true
         
         // Create the section
         let section = NSCollectionLayoutSection(group: group)

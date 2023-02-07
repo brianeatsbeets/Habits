@@ -100,18 +100,28 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6D-5W-Mgn">
-                                            <rect key="frame" x="32" y="45" width="349" height="75"/>
+                                            <rect key="frame" x="32" y="45" width="349" height="74"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQo-i0-TAe">
+                                            <rect key="frame" x="19.333333333333343" y="127" width="350.33333333333326" height="1"/>
+                                            <color key="backgroundColor" systemColor="labelColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="2Wd-44-xGY"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="qQo-i0-TAe" secondAttribute="bottom" id="01Y-hv-tCK"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1kK-b8-uGF" secondAttribute="trailing" constant="8" id="4UR-fO-PpD"/>
                                         <constraint firstItem="Z6D-5W-Mgn" firstAttribute="top" secondItem="1kK-b8-uGF" secondAttribute="bottom" constant="16" id="57u-qz-Sim"/>
+                                        <constraint firstItem="qQo-i0-TAe" firstAttribute="centerX" secondItem="mAR-kQ-4YT" secondAttribute="centerX" id="IJv-fY-mRQ"/>
                                         <constraint firstItem="Z6D-5W-Mgn" firstAttribute="leading" secondItem="1kK-b8-uGF" secondAttribute="leading" constant="24" id="Rvu-Vj-egW"/>
                                         <constraint firstAttribute="trailing" secondItem="Z6D-5W-Mgn" secondAttribute="trailing" constant="8" id="W4E-iK-1Bf"/>
-                                        <constraint firstAttribute="bottom" secondItem="Z6D-5W-Mgn" secondAttribute="bottom" constant="8" id="rKr-I0-OJr"/>
+                                        <constraint firstItem="qQo-i0-TAe" firstAttribute="top" secondItem="Z6D-5W-Mgn" secondAttribute="bottom" constant="8" id="ce8-Ql-RdV"/>
+                                        <constraint firstItem="qQo-i0-TAe" firstAttribute="width" secondItem="mAR-kQ-4YT" secondAttribute="width" multiplier="0.9" id="nZx-Ek-PoH"/>
                                         <constraint firstItem="1kK-b8-uGF" firstAttribute="leading" secondItem="mAR-kQ-4YT" secondAttribute="leading" constant="8" id="tba-tQ-P8q"/>
                                         <constraint firstItem="1kK-b8-uGF" firstAttribute="top" secondItem="mAR-kQ-4YT" secondAttribute="top" constant="8" id="vB9-2T-xJe"/>
                                     </constraints>
@@ -120,6 +130,8 @@
                                 <connections>
                                     <outlet property="primaryTextLabel" destination="1kK-b8-uGF" id="4RU-i3-XNA"/>
                                     <outlet property="secondaryTextLabel" destination="Z6D-5W-Mgn" id="cLp-xB-RaK"/>
+                                    <outlet property="separatorLineHeightConstraint" destination="2Wd-44-xGY" id="aKu-6S-n7d"/>
+                                    <outlet property="separatorLineView" destination="qQo-i0-TAe" id="W7f-qJ-TgG"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -469,6 +481,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Y0q-QB-wKw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c9Q-e2-boA">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -490,6 +503,9 @@
         <image name="person.2.fill" catalog="system" width="128" height="81"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
